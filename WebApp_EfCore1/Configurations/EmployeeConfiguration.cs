@@ -14,6 +14,12 @@ namespace WebApp_EfCore1.Configurations
             builder.Property(x=>x.EmployeeName).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Gender).IsRequired().HasMaxLength(2);
             builder.Property(x => x.Age).IsRequired().HasDefaultValue(18);
+
+            // we can also create the fluent configuration for the foreign key nad navigation key
+            //builder.HasOne(x=>x.Department)  // employee has one depratment
+            //    .WithMany(x => x.Employees)  // department has many employee
+            //    .HasForeignKey(x => x.DepartmentId)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

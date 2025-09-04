@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp_EfCore1.Data;
+using WebApp_EfCore1.Models;
 
 namespace WebApp_EfCore1.Controllers
 {
@@ -48,6 +49,41 @@ namespace WebApp_EfCore1.Controllers
                 dbContext.SaveChanges();
             }
             return View(employeeDetails);
+        }
+
+        [Route("GetEmpDetails/{id:int}")]
+        public IActionResult GetEmpDetails(int id)
+        {
+
+            //var result1 = (from emp in dbContext.Employees
+            //              join dep in dbContext.Department
+            //              on emp.Id equals dep.Id
+            //              where emp.Id == id
+            //              select new Employee
+            //              {
+            //                  EmployeeName = emp.EmployeeName,
+            //                  Age = emp.Age,
+            //                  Gender = emp.Gender,
+            //                  Address = emp.Address,
+            //                 // Department = dep.DepartmentName
+            //              }).AsEnumerable();
+
+           
+            // create join with employee and department table to get the record
+            var result2 = (from emp in dbContext.Employees
+                         join dep in dbContext.Department
+                         on emp.Id equals dep.Id
+                         where emp.Id== id
+                         select new EmployeeDetailsViewModel // converted in the viewmodel as per target
+                         {
+                            EmployeeName= emp.EmployeeName,
+                            Age= emp.Age,
+                            Gender= emp.Gender,
+                            Address= emp.Address,
+                            Department = dep.DepartmentName
+                            }).ToList();
+           
+            return View(result2);
         }
     }
 }

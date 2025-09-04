@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Microsoft.EntityFrameworkCore;
+using WebApp_EfCore1.Data.StoredProcedures;
 
 namespace WebApp_EfCore1.Data
 {
@@ -13,6 +14,7 @@ namespace WebApp_EfCore1.Data
         public DbSet<Employee> Employees { get; set; } 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Department> Department { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public override int SaveChanges()
         {
@@ -34,7 +36,12 @@ namespace WebApp_EfCore1.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //1 // Call the Model class for the stored procedure so no table will be created\
+            // only it is usable for the queries as a view then run migration
+            modelBuilder.Entity<FindEmployeesDTO>().HasNoKey().ToView(null);
+        
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

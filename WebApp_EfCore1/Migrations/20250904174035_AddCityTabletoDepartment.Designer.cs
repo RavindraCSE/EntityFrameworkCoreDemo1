@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp_EfCore1.Data;
 
@@ -11,9 +12,11 @@ using WebApp_EfCore1.Data;
 namespace WebApp_EfCore1.Migrations
 {
     [DbContext(typeof(FusionStackContext))]
-    partial class FusionStackContextModelSnapshot : ModelSnapshot
+    [Migration("20250904174035_AddCityTabletoDepartment")]
+    partial class AddCityTabletoDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,36 +169,6 @@ namespace WebApp_EfCore1.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("WebApp_EfCore1.Data.StoredProcedures.FindEmployeesDTO", b =>
-                {
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DepartmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable((string)null);
-
-                    b.ToView(null, (string)null);
                 });
 
             modelBuilder.Entity("WebApp_EfCore1.Data.Department", b =>

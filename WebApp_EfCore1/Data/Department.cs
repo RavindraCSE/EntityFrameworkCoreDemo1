@@ -7,5 +7,6 @@
         public ICollection<Employee> Employees { get; set; } // navigation property
         // we do not need to register in the dbContext File because it
         // //will autometically detect using the navigatio property
+    public City City { get; set; }
     }
 }

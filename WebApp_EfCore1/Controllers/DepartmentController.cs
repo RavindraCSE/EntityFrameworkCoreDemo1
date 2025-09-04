@@ -13,6 +13,7 @@ namespace WebApp_EfCore1.Controllers
         }
         public IActionResult Index()
         {
+            var locationData = dbContext.Cities.FirstOrDefault(x => x.Id == 1);
             Department department = new Department() 
             { 
                 DepartmentName="IT",
@@ -20,6 +21,7 @@ namespace WebApp_EfCore1.Controllers
                 //CreatedOn=DateTime.Now
                 // no need to write we have overridden the savechanges() method in the 
                 // dbContext configurationfile
+                City= locationData
             };
             dbContext.Department.Add(department);
             dbContext.SaveChanges();

@@ -9,4 +9,8 @@
       public string  Department { get; set; }
 
     }
+    public class GetEmpDetailsByNavigationViewModel : EmployeeDetailsViewModel
+    {
+        public string City {  get; set; }
+    }
 }

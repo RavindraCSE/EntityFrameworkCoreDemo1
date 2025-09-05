@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp_EfCore1.Data;
+using WebApp_EfCore1.DBFirstModels;
 
 namespace WebApp_EfCore1
 {
@@ -12,6 +13,11 @@ namespace WebApp_EfCore1
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<FusionStackContext>(options =>
+            {
+
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection"));
+            });
+            builder.Services.AddDbContext<FusionStackDbFirstContext>(options =>
             {
 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection"));
